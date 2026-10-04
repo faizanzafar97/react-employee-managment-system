@@ -1,13 +1,13 @@
 import React from 'react'
 
-const Login = () => {
+const Login = ({ handleLogin }) => {
 
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
 
   const submithandler = (e) => {
     e.preventDefault()
-
+    handleLogin(email, password)
     // Handle login logic here
     console.log("Form submitted")
 
