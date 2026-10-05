@@ -1,12 +1,14 @@
-import React from 'react'
-import Header from '../others/header'
-import TaskList from '../others/tasklistno'
-import TaskListCards from '../Tasklist/tasklist'
 
-const EmployeeDashboard = () => {
+
+import React from "react";
+import Header from "../others/header";
+import TaskList from "../others/tasklistno";
+import TaskListCards from "../Tasklist/tasklist";
+
+const EmployeeDashboard = ({ data }) => {
   return (
     <div className="min-h-screen bg-slate-950 text-white">
-      <Header />
+      <Header data={data} />
 
       <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
 
@@ -14,15 +16,15 @@ const EmployeeDashboard = () => {
           Employee Dashboard
         </h1>
 
-        <TaskList />
+        <TaskList data={data} />
 
         <div className="mt-8">
-          <TaskListCards />
+          <TaskListCards data={data} />
         </div>
 
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default EmployeeDashboard
+export default EmployeeDashboard;

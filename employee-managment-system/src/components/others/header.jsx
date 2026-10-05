@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-const Header = () => {
+const Header = ({data}) => {
   return (
     <header className="border-b border-slate-800 bg-slate-900/95 shadow-lg backdrop-blur">
       <div className="mx-auto flex min-h-20 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">

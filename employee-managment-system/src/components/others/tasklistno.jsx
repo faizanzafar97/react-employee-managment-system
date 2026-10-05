@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-const TaskList = () => {
+const TaskList = ({data}) => {
   return (
     <div className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2">
 
