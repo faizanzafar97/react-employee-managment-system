@@ -27,7 +27,7 @@ const TaskList = ({data}) => {
         </h2>
 
         <h3 className="mt-2 text-sm font-semibold uppercase tracking-wide text-slate-400">
-          In Progress
+          ACCEPTED TASKS
         </h3>
 
       </div>
@@ -40,7 +40,7 @@ const TaskList = ({data}) => {
         </h2>
 
         <h3 className="mt-2 text-sm font-semibold uppercase tracking-wide text-slate-400">
-          Completed
+          Completed Tasks
         </h3>
 
       </div>

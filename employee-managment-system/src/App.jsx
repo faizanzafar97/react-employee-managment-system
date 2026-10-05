@@ -1,4 +1,4 @@
-// App.jsx - COMPLETE FIXED CODE
+
 
 import React, { useContext, useEffect } from "react";
 import { AuthContext } from "./context/AuthProvider";
@@ -9,26 +9,27 @@ import AdminDashboard from "./components/Dashboard/AdminDashboard";
 const App = () => {
   const authData = useContext(AuthContext);
 
-  const [loggedInUser, setLoggedInUser] = React.useState(null);
+  const [loggedInUserData, setLoggedInUserData] = React.useState(null);
   const [user, setUser] = React.useState(null);
 
   useEffect(() => {
-    if (authData) {
-      const storedUser = JSON.parse(
-        localStorage.getItem("loggedInUser")
-      );
+    const loggedinUser = localStorage.getItem("loggedInUser");
 
-      if (storedUser) {
-        setUser(storedUser);
-        setLoggedInUser(storedUser);
-      }
+    if (loggedinUser) {
+      const userdata = JSON.parse(loggedinUser);
+
+      setLoggedInUserData(userdata);
+      setUser(userdata);
     }
-  }, [authData]);
+  }, []);
 
   const handleLogin = (email, password) => {
     if (!authData) return;
 
+    // =========================
     // ADMIN LOGIN
+    // =========================
+
     const admin = authData.admin?.find(
       (user) =>
         user.email === email &&
@@ -39,7 +40,7 @@ const App = () => {
       console.log("Admin logged in");
 
       setUser(admin);
-      setLoggedInUser(admin);
+      setLoggedInUserData(admin);
 
       localStorage.setItem(
         "loggedInUser",
@@ -49,7 +50,10 @@ const App = () => {
       return;
     }
 
+    // =========================
     // EMPLOYEE LOGIN
+    // =========================
+
     const employee = authData.employees?.find(
       (user) =>
         user.email === email &&
@@ -60,7 +64,7 @@ const App = () => {
       console.log("Employee logged in");
 
       setUser(employee);
-      setLoggedInUser(employee);
+      setLoggedInUserData(employee);
 
       localStorage.setItem(
         "loggedInUser",
@@ -73,9 +77,21 @@ const App = () => {
     alert("Invalid credentials");
   };
 
+  // =========================
+  // LOADING
+  // =========================
+
   if (!authData) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-slate-950 text-white">
+        Loading...
+      </div>
+    );
   }
+
+  // =========================
+  // DASHBOARD
+  // =========================
 
   return (
     <div>
@@ -84,7 +100,7 @@ const App = () => {
       ) : user.role === "admin" ? (
         <AdminDashboard />
       ) : user.role === "employee" ? (
-        <EmployeeDashboard data={loggedInUser} />
+        <EmployeeDashboard data={loggedInUserData} />
       ) : null}
     </div>
   );
