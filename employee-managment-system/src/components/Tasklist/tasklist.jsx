@@ -1,8 +1,8 @@
-// TaskList.jsx
+
 
 import React from 'react'
 
-const TaskList = () => {
+const TaskList = ({data}) => {
   return (
     <div className="w-full max-h-128 overflow-y-auto scrollbar-hide space-y-4">
 

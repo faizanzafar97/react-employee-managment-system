@@ -16,7 +16,7 @@ const Header = ({data}) => {
           <h1 className="mt-1 text-xl font-bold tracking-tight text-white sm:text-2xl">
             Hello,{' '}
             <span className="text-blue-400">
-              Faizan
+             {data.firstName} 
             </span>
           </h1>
         </div>
