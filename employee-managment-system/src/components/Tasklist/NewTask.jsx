@@ -1,28 +1,28 @@
 import React from 'react'
 
-const NewTask = () => {
+const NewTask = ({data}) => {
   return (
    <div className="rounded-2xl border border-slate-800 bg-slate-900 p-5 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-slate-700 hover:shadow-xl">
 
         <div className="mb-4 flex items-center justify-between gap-4">
 
-          <h3 className="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-blue-400">
-            Normal
+          <h3 className="rounded-full bg-slate-700 px-3 py-1 text-xs font-bold uppercase tracking-wide text-slate-300">
+            {data.category}
           </h3>
 
           <h4 className="text-xs font-medium text-slate-500">
-            25 Feb 2024
+            {data.taskDate}
           </h4>
 
         </div>
 
         <h2 className="text-lg font-semibold text-white">
-          Complete React Practice
+          {data.taskTitle}
         </h2>
 
         <p className="mt-2 text-sm leading-6 text-slate-400">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-          Eius est expedita, modi sint fugiat cupiditate.
+          {data.taskDescription}
+          
         </p>
 
         <div className="mt-5 flex flex-wrap gap-3">
