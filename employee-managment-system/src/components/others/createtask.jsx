@@ -1,15 +1,32 @@
-// createtask.jsx
+import React, { useState } from "react";
 
-import React from "react";
+const CreateTask = () => {
 
-const CreateTask = ({ handleSubmit }) => {
+
+  const [taskTitle, setTaskTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
+  const [assignTo, setAssignTo] = useState("");
+  const [category, setCategory] = useState("");
+
+  const [task,setTask] = useState([])
+
+   const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('Task Created')
+    setTask( { taskTitle, description, date, assignTo, category , active:false,newTask:true})
+
+    const data=JSON.parse(localStorage.getItem('employees'))
+
+
+
+   
+   }
   return (
     <div className="w-full bg-slate-950 text-white">
 
-      {/* Main */}
       <main className="w-full px-4 py-8 sm:px-6 lg:px-8">
 
-        {/* Page Heading */}
         <section className="mb-8">
           <h2 className="text-3xl font-bold tracking-tight text-white">
             Admin Dashboard
@@ -20,10 +37,8 @@ const CreateTask = ({ handleSubmit }) => {
           </p>
         </section>
 
-        {/* Create Task */}
         <section className="w-full rounded-2xl border border-slate-800 bg-slate-900 p-6 shadow-lg sm:p-8">
 
-          {/* Card Header */}
           <div className="mb-7">
             <div className="flex items-center gap-3">
 
@@ -44,9 +59,8 @@ const CreateTask = ({ handleSubmit }) => {
             </div>
           </div>
 
-          {/* Form */}
           <form
-            onSubmit={handleSubmit}
+            onSubmit={(e) => handleSubmit(e)}
             className="w-full space-y-5"
           >
 
@@ -65,6 +79,8 @@ const CreateTask = ({ handleSubmit }) => {
                 type="text"
                 placeholder="Make a UI design"
                 required
+                value={taskTitle}
+                onChange={(e) => setTaskTitle(e.target.value)}
                 className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
               />
             </div>
@@ -84,6 +100,8 @@ const CreateTask = ({ handleSubmit }) => {
                 rows="5"
                 placeholder="Detailed description of task..."
                 required
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 className="w-full resize-none rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
               />
             </div>
@@ -102,6 +120,8 @@ const CreateTask = ({ handleSubmit }) => {
                 name="date"
                 type="date"
                 required
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
                 className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-slate-300 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
               />
             </div>
@@ -118,8 +138,9 @@ const CreateTask = ({ handleSubmit }) => {
               <select
                 id="assignTo"
                 name="assignTo"
-                defaultValue=""
                 required
+                value={assignTo}
+                onChange={(e) => setAssignTo(e.target.value)}
                 className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-slate-300 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
               >
                 <option value="" disabled>
@@ -145,8 +166,9 @@ const CreateTask = ({ handleSubmit }) => {
               <select
                 id="category"
                 name="category"
-                defaultValue=""
                 required
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
                 className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-slate-300 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
               >
                 <option value="" disabled>

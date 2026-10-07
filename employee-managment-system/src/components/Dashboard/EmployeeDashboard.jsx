@@ -5,10 +5,10 @@ import Header from "../others/header";
 import TaskList from "../others/tasklistno";
 import TaskListCards from "../Tasklist/tasklist";
 
-const EmployeeDashboard = ({ data }) => {
+const EmployeeDashboard = (props) => {
   return (
     <div className="min-h-screen bg-slate-950 text-white">
-      <Header data={data} />
+      <Header changeUser={props.changeUser} data={props.data} />
 
       <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
 
@@ -16,10 +16,10 @@ const EmployeeDashboard = ({ data }) => {
           Employee Dashboard
         </h1>
 
-        <TaskList data={data} />
+        <TaskList data={props.data} />
 
         <div className="mt-8">
-          <TaskListCards data={data} />
+          <TaskListCards data={props.data} />
         </div>
 
       </main>
