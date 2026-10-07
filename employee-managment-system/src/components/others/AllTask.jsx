@@ -1,11 +1,13 @@
+// AllTask.jsx
+
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 
 const AllTask = () => {
-  const authdata = useContext(AuthContext);
+  const { employees } = useContext(AuthContext);
 
   return (
-    <div className="w-full space-y-4 pr-2">
+    <div className="w-full space-y-4 px-4 pb-8 sm:px-6 lg:px-8">
 
       {/* Header */}
       <div className="grid grid-cols-5 gap-4 rounded-xl border border-slate-800 bg-slate-900 px-5 py-4">
@@ -30,53 +32,75 @@ const AllTask = () => {
         </h3>
       </div>
 
-      {/* Employees */}
-      <div className="w-full max-h-128 space-y-3 overflow-y-auto scrollbar-hide">
-        {authdata?.employees?.map((elem, idx) => {
+      {/* Employee List */}
+      <div className="max-h-128 w-full space-y-3 overflow-y-auto">
+
+        {employees?.map((employee) => {
+
+          const tasks = employee.tasks || [];
+
+          const newTasks = tasks.filter(
+            (task) => task.newTask === true
+          ).length;
+
+          const activeTasks = tasks.filter(
+            (task) => task.active === true
+          ).length;
+
+          const completedTasks = tasks.filter(
+            (task) => task.completed === true
+          ).length;
+
+          const failedTasks = tasks.filter(
+            (task) => task.failed === true
+          ).length;
+
           return (
             <div
-              key={idx}
+              key={employee.id}
               className="grid grid-cols-5 gap-4 rounded-xl border border-slate-800 bg-slate-900 px-5 py-5 shadow-lg transition-all duration-200 hover:border-slate-700 hover:bg-slate-800/80"
             >
-              {/* Employee */}
+
+              {/* Employee Name */}
               <div>
                 <h2 className="font-semibold text-white">
-                  {elem.name}
+                  {employee.name}
                 </h2>
               </div>
 
               {/* New Tasks */}
               <div>
                 <h3 className="font-semibold text-blue-400">
-                  {elem.taskCount?.newTask || 0}
+                  {newTasks}
                 </h3>
               </div>
 
               {/* Active Tasks */}
               <div>
                 <h3 className="font-semibold text-yellow-400">
-                  {elem.taskCount?.active || 0}
+                  {activeTasks}
                 </h3>
               </div>
 
               {/* Completed */}
               <div>
                 <h3 className="font-semibold text-green-400">
-                  {elem.taskCount?.completed || 0}
+                  {completedTasks}
                 </h3>
               </div>
 
               {/* Failed */}
               <div>
                 <h3 className="font-semibold text-red-400">
-                  {elem.taskCount?.failed || 0}
+                  {failedTasks}
                 </h3>
               </div>
+
             </div>
           );
         })}
-      </div>
 
+      </div>
     </div>
   );
 };

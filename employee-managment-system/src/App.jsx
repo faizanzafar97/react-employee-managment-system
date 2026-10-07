@@ -1,4 +1,4 @@
-
+// App.jsx
 
 import React, { useContext, useEffect } from "react";
 import { AuthContext } from "./context/AuthProvider";
@@ -26,10 +26,6 @@ const App = () => {
   const handleLogin = (email, password) => {
     if (!authData) return;
 
-    // =========================
-    // ADMIN LOGIN
-    // =========================
-
     const admin = authData.admin?.find(
       (user) =>
         user.email === email &&
@@ -49,10 +45,6 @@ const App = () => {
 
       return;
     }
-
-    // =========================
-    // EMPLOYEE LOGIN
-    // =========================
 
     const employee = authData.employees?.find(
       (user) =>
@@ -77,10 +69,6 @@ const App = () => {
     alert("Invalid credentials");
   };
 
-  // =========================
-  // LOADING
-  // =========================
-
   if (!authData) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-slate-950 text-white">
@@ -89,10 +77,6 @@ const App = () => {
     );
   }
 
-  // =========================
-  // DASHBOARD
-  // =========================
-
   return (
     <div>
       {!user ? (
@@ -100,7 +84,10 @@ const App = () => {
       ) : user.role === "admin" ? (
         <AdminDashboard changeUser={setUser} />
       ) : user.role === "employee" ? (
-        <EmployeeDashboard  changeUser={setUser} data={loggedInUserData} />
+        <EmployeeDashboard
+          changeUser={setUser}
+          data={loggedInUserData}
+        />
       ) : null}
     </div>
   );

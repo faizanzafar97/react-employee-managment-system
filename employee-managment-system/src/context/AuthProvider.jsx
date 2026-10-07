@@ -1,16 +1,14 @@
+// AuthProvider.jsx
 
-
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getLocalStorage } from "../uthils/localStorage.jsx";
-import { setLocalStorage } from "../uthils/localStorage.jsx";
 
 export const AuthContext = React.createContext();
 
 const AuthProvider = ({ children }) => {
-  const [userdata, setUserdata] = React.useState(null);
+  const [userdata, setUserdata] = useState(null);
 
   useEffect(() => {
-    setLocalStorage();
     const { employeesData, adminData } = getLocalStorage();
 
     setUserdata({
@@ -19,8 +17,25 @@ const AuthProvider = ({ children }) => {
     });
   }, []);
 
+  const updateEmployees = (updatedEmployees) => {
+    localStorage.setItem(
+      "employees",
+      JSON.stringify(updatedEmployees)
+    );
+
+    setUserdata((prev) => ({
+      ...prev,
+      employees: updatedEmployees,
+    }));
+  };
+
   return (
-    <AuthContext.Provider value={userdata}>
+    <AuthContext.Provider
+      value={{
+        ...userdata,
+        updateEmployees,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
