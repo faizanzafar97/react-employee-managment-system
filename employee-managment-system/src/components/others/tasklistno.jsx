@@ -1,65 +1,61 @@
+import React from "react";
+import AccepetTask from "../Tasklist/AccepetTask";
+import CompleteTask from "../Tasklist/CompleteTask";
+import Failedtask from "../Tasklist/Failedtask";
+import NewTask from "../Tasklist/NewTask";
 
-
-import React from 'react'
-
-const TaskList = ({data}) => {
+const TaskList = ({ data }) => {
   return (
-    <div className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2">
+    <div className="w-full space-y-4">
+      {data?.tasks?.map((task, index) => {
+        if (task.active) {
+          return (
+            <AccepetTask
+              key={index}
+              data={task}
+              taskIndex={index}
+              employeeId={data.id}
+            />
+          );
+        }
 
-      {/* New Tasks */}
-      <div className="rounded-2xl border border-blue-500/20 bg-slate-900 p-6 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-blue-500/40 hover:shadow-blue-500/10">
+        if (task.newTask) {
+          return (
+            <NewTask
+              key={index}
+              data={task}
+              taskIndex={index}
+              employeeId={data.id}
+            />
+          );
+        }
 
-        <h2 className="text-4xl font-bold tracking-tight text-blue-400">
-          {data.taskCount.newTask}
-        </h2>
+        if (task.completed) {
+          return (
+            <CompleteTask
+              key={index}
+              data={task}
+              taskIndex={index}
+              employeeId={data.id}
+            />
+          );
+        }
 
-        <h3 className="mt-2 text-sm font-semibold uppercase tracking-wide text-slate-400">
-          New Tasks
-        </h3>
+        if (task.failed) {
+          return (
+            <Failedtask
+              key={index}
+              data={task}
+              taskIndex={index}
+              employeeId={data.id}
+            />
+          );
+        }
 
-      </div>
-
-      {/* In Progress */}
-      <div className="rounded-2xl border border-amber-500/20 bg-slate-900 p-6 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-amber-500/40 hover:shadow-amber-500/10">
-
-        <h2 className="text-4xl font-bold tracking-tight text-amber-400">
-          {data.taskCount.active}
-        </h2>
-
-        <h3 className="mt-2 text-sm font-semibold uppercase tracking-wide text-slate-400">
-          ACCEPTED TASKS
-        </h3>
-
-      </div>
-
-      {/* Completed */}
-      <div className="rounded-2xl border border-emerald-500/20 bg-slate-900 p-6 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-emerald-500/40 hover:shadow-emerald-500/10">
-
-        <h2 className="text-4xl font-bold tracking-tight text-emerald-400">
-          {data.taskCount.completed}
-        </h2>
-
-        <h3 className="mt-2 text-sm font-semibold uppercase tracking-wide text-slate-400">
-          Completed Tasks
-        </h3>
-
-      </div>
-
-      {/* Failed */}
-      <div className="rounded-2xl border border-red-500/20 bg-slate-900 p-6 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-red-500/40 hover:shadow-red-500/10">
-
-        <h2 className="text-4xl font-bold tracking-tight text-red-400">
-          {data.taskCount.failed}
-        </h2>
-
-        <h3 className="mt-2 text-sm font-semibold uppercase tracking-wide text-slate-400">
-          Failed Tasks
-        </h3>
-
-      </div>
-
+        return null;
+      })}
     </div>
-  )
-}
+  );
+};
 
-export default TaskList
+export default TaskList;
